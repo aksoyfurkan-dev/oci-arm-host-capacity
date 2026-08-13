@@ -36,6 +36,7 @@ jobs:
           OCI_KEY_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
           OCI_PRIVATE_KEY_FILENAME: 'private_key.pem'
           OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
+          OCI_IMAGE_ID: 'ocid1.image.oc1.eu-frankfurt-1.aaaaaaaaqvd3uqw4f2sp3x6k3qf6znd5l3a6f4sxywzrq6jrg'
           OCI_AVAILABILITY_DOMAIN: ''
           OCI_SHAPE: 'VM.Standard.A1.Flex'
           OCI_OCPUS: '4'
