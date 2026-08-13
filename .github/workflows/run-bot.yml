@@ -2,8 +2,10 @@ name: OCI ARM Auto Scraper
 
 on:
   schedule:
+    # Her 10 dakikada bir otomatik çalışır
     - cron: '*/10 * * * *'
   workflow_dispatch:
+    # Manuel tetikleme butonu
 
 jobs:
   run-bot:
@@ -21,13 +23,18 @@ jobs:
       - name: Install Dependencies
         run: composer install --prefer-dist --no-progress
 
+      - name: Create Private Key File
+        run: |
+          echo "${{ secrets.OCI_KEY_CONTENT }}" > private_key.pem
+          chmod 600 private_key.pem
+
       - name: Run OCI Capacity Bot
         env:
           OCI_USER_ID: ${{ secrets.OCI_USER_OCID }}
           OCI_TENANCY_ID: ${{ secrets.OCI_TENANCY_OCID }}
           OCI_REGION: ${{ secrets.OCI_REGION }}
-          OCI_KEY_CONTENT: ${{ secrets.OCI_KEY_CONTENT }}
           OCI_KEY_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
+          OCI_PRIVATE_KEY_FILENAME: 'private_key.pem'
           OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
           OCI_AVAILABILITY_DOMAIN: ''
           OCI_SHAPE: 'VM.Standard.A1.Flex'
